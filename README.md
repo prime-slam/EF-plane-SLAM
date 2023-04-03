@@ -1,16 +1,17 @@
-# SLAM-Backend-Benchmark
+# EF Plane SLAM Back-end Benchmark
 
 This repository contains all required scripts and notebooks to compare quality of different SLAM Backends
 using planes as landmarks.
 
 ## Data
 As the data source we provide two variants: [EVOPS dataset](https://evops.netlify.app)
-and synthetic planar poses generator from [mrob](https://github.com/g-ferrer/mrob) library.
+and synthetic planar poses generator from [mrob](https://github.com/prime-slam/mrob) library.
 
 ## Supported backends
-For comparison needs two algorithms except origin EF backend were implemented in **mrob** library. They are:
+For comparison needs two algorithms except origin EF backend are implemented in **mrob** library. They are:
 * [Pi-Factor](https://www.cs.cmu.edu/~kaess/pub/Zhou21ral2.pdf)
 * [Bareg](https://arxiv.org/abs/2108.02976)
+* [EF]() Eigen Factors
 
 ## Evaluations
 You can see examples of backend comparisons in two Python notebooks: 
