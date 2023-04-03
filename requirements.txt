@@ -1,0 +1,6 @@
+mrob==0.0.11
+numpy
+open3d
+pandas
+matplotlib
+tqdm
