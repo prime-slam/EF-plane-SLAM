@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import mrob
+
 from plane_backends.BaseBackend import BaseBackend
 
 
@@ -26,3 +28,6 @@ class BaregBackend(BaseBackend):
             pointsArray=observation[plane_id],
             W=1.0
         )
+
+    def _optimize(self):
+        return self.graph.solve(mrob.LM_ELLIPS, self.iterations_count)

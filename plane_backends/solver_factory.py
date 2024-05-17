@@ -13,14 +13,14 @@
 # limitations under the License.
 
 from plane_backends.backend_impls.BaregBackend import BaregBackend
-from plane_backends.backend_impls.EFBackend import EFBackend
-from plane_backends.backend_impls.EFCenteredBackend import EFCenteredBackend
+from plane_backends.backend_impls.EFDenseBackend import EFDenseBackend
+from plane_backends.backend_impls.EFAlternatingBackend import EFAlternatingBackend
 from plane_backends.backend_impls.LandmarkBackend import LandmarkBackend
 from plane_backends.backend_impls.PiFBackend import PiFBackend
 
 solvers = {
-    'ef': EFBackend,
-    'ef-centered': EFCenteredBackend,
+    'ef-dense': EFDenseBackend,
+    'ef-alternating': EFAlternatingBackend,
     'bareg': BaregBackend,
     'pi-factor': PiFBackend,
     'landmark': LandmarkBackend,

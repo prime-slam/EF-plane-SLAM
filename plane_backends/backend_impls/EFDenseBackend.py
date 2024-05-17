@@ -1,4 +1,4 @@
-# Copyright (c) 2022, Gonzalo Ferrer, Dmitrii Iarosh, Anastasiia Kornilova
+# Copyright (c) 2024, Gonzalo Ferrer, Dmitrii Iarosh, Anastasiia Kornilova
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from plane_backends.BaseBackend import BaseBackend
+import mrob
+
+from plane_backends.EFBackend import EFBackend
 
 
-class EFCenteredBackend(BaseBackend):
+class EFDenseBackend(EFBackend):
     def _add_node_to_graph(self):
-        return self.graph.add_eigen_factor_plane_center()
-
-    def _register_observation(self, observation, pose_id, plane_id, graph_plane_id):
-        self.graph.eigen_factor_plane_add_points_array(
-            planeEigenId=graph_plane_id,
-            nodePoseId=pose_id,
-            pointsArray=observation[plane_id],
-            W=1.0
-        )
+        return self.graph.add_eigen_factor_plane_dense()
+    
+    def _optimize(self):
+        print('Here')
+        return self.graph.solve(mrob.LM_ELLIPS, 1000, lambdaParam=0.1)
