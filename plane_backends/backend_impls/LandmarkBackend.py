@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import numpy as np
+import mrob
 
 from plane_backends.BaseBackend import BaseBackend
 
@@ -40,3 +41,6 @@ class LandmarkBackend(BaseBackend):
         normal = int(np.sign(d)) * n
         d *= np.sign(d)
         return np.asarray([normal[0], normal[1], normal[2], d])
+
+    def _optimize(self):
+        return self.graph.solve(mrob.LM_ELLIPS, self.iterations_count)

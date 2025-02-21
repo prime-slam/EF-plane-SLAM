@@ -1,4 +1,4 @@
-# Copyright (c) 2022, Gonzalo Ferrer, Dmitrii Iarosh, Anastasiia Kornilova
+# Copyright (c) 2024, Gonzalo Ferrer, Dmitrii Iarosh, Anastasiia Kornilova
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,20 +13,13 @@
 # limitations under the License.
 
 import mrob
-import numpy as np
 
-from plane_backends.BaseBackend import BaseBackend
+from plane_backends.EFBackend import EFBackend
 
 
-class PiFBackend(BaseBackend):
+class EFAlternatingBackend(EFBackend):
     def _add_node_to_graph(self):
-        return self.graph.add_node_plane_4d(np.array([1, 1, 1, 1]))
-
-    def _register_observation(self, observation, pose_id, plane_id, graph_plane_id):
-        S = mrob.registration.estimate_matrix_S(observation[plane_id])
-        self.graph.add_pi_factor_plane_4d(
-            S, pose_id, graph_plane_id
-        )
+        return self.graph.add_eigen_factor_plane_alternating()
 
     def _optimize(self):
         return self.graph.solve(mrob.LM_ELLIPS, self.iterations_count)

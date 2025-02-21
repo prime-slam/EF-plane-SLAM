@@ -30,7 +30,7 @@ class BaseBackend(abc.ABC):
         self._init_poses(Ts_init)
         self.__add_observations(observations)
         timestamp_before_optimization = datetime.datetime.now()
-        used_iterations_count = self.__optimize()
+        used_iterations_count = self._optimize()
         timestamp_after_optimization = datetime.datetime.now()
         return (
             self.__get_trajectory(),
@@ -43,9 +43,6 @@ class BaseBackend(abc.ABC):
         for i, Ts in enumerate(Ts_init):
             node_mode = mrob.NODE_ANCHOR if i == 0 else mrob.NODE_STANDARD
             self.graph.add_node_pose_3d(mrob.geometry.SE3(Ts), node_mode)
-            
-    def __optimize(self):
-        return self.graph.solve(mrob.LM_ELLIPS, self.iterations_count)
         
     def __get_trajectory(self):
         return self.graph.get_estimated_state()
@@ -70,4 +67,8 @@ class BaseBackend(abc.ABC):
 
     @abc.abstractmethod
     def _register_observation(self, observation, pose_id, plane_id, graph_plane_id):
+        pass
+
+    @abc.abstractmethod
+    def _optimize(self):
         pass
